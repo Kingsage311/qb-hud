@@ -43,8 +43,8 @@
 #playerhud {
   display: flex;
   position: absolute;
-  bottom: 0vw;
-  left: 1.5vh;
+  bottom: .15vw;
+  left: .15vh;
 }
 
 /* Vehicle HUD */
@@ -52,7 +52,6 @@
 .ui-car-fuel,
 .ui-car-nos,
 .ui-car-seatbelt,
-.ui-car-cruise,
 .ui-car-speed,
 .ui-car-street {
   position: absolute;
@@ -64,13 +63,13 @@
 }
 
 .ui-car-fuel {
-  left: 18.9vw;
+  left: 17.9vw;
   bottom: 1.9vw;
 }
 
 .ui-car-nos {
-  left: 16.7vw;
-  bottom: 5.4vw;
+  left: 15.7vw;
+  bottom: .15vw;
 }
 
 .ui-car-seatbelt {
@@ -78,16 +77,11 @@
   bottom: 3.56vw;
 }
 
-.ui-car-cruise {
-  left: 18.3vw;
-  bottom: 8.7vh;
-}
-
 .ui-car-street {
   font-size: 15px;
   text-transform: uppercase;
   bottom: 0vh;
-  left: 16.5vw;
+  left: 18.5vw;
   color: #ededed;
 }
 
@@ -104,4 +98,91 @@
 .slide-fade-leave-to {
   transform: translateX(20px);
   opacity: 0;
+}
+
+/* Quasar Custom Colors */
+
+/* Voice */
+.text-voice {
+  color: #868686
+}
+
+/* Voice Track */
+.text-voice2 {
+  color: #868686;
+  filter: brightness(0.5)
+}
+
+
+/* Health */
+.text-health {
+  color: #00b95d
+}
+
+/* Health Track */
+.text-health2 {
+  color: #00b95d;
+  filter: brightness(0.5)
+}
+
+
+/* Armor */
+.text-armor {
+  color: #f41a12;
+}
+
+/* Armor Track */
+.text-armor2 {
+  color: #f41a12;
+  filter: brightness(0.5)
+}
+
+
+/* Hunger */
+.text-hunger {
+  color: #fd7a11
+}
+
+/* Hunger Track */
+.text-hunger2 {
+  color: #fd7a11;
+  filter: brightness(0.5)
+}
+
+
+/* Thirst */
+.text-thirst {
+  color: #0d6fb5
+}
+
+/* Thirst Track */
+.text-thirst2 {
+  color: #0d6fb5;
+  filter: brightness(0.5)
+}
+
+/* Stress */
+.text-stress {
+  color: #e21210
+}
+
+/* Stress Track */
+.text-stress2 {
+  color: #e21210;
+  filter: brightness(0.5)
+}
+
+/* Nitrous */
+.text-nitro {
+  color: #ae00ff
+}
+
+/* Nitrous Track */
+.text-nitro2 {
+  color: #ae00ff;
+  filter: brightness(0.5)
+}
+
+.text-center {
+  color: #231f20;
 }

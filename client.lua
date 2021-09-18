@@ -11,7 +11,6 @@ local bankAmount = 0
 local isLoggedIn = false
 
 -- Events
-
 RegisterNetEvent('QBCore:Client:OnPlayerUnload')
 AddEventHandler('QBCore:Client:OnPlayerUnload', function()
     isLoggedIn = false
@@ -22,23 +21,23 @@ AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     isLoggedIn = true
 end)
 
-RegisterNetEvent('hud:client:UpdateNeeds') -- Triggered in qb-core
+RegisterNetEvent('hud:client:UpdateNeeds')-- Triggered in qb-core
 AddEventHandler('hud:client:UpdateNeeds', function(newHunger, newThirst)
     hunger = newHunger
     thirst = newThirst
 end)
 
-RegisterNetEvent('hud:client:UpdateStress') -- Add this event with adding stress elsewhere
+RegisterNetEvent('hud:client:UpdateStress')-- Add this event with adding stress elsewhere
 AddEventHandler('hud:client:UpdateStress', function(newStress)
     stress = newStress
 end)
 
-RegisterNetEvent('seatbelt:client:ToggleSeatbelt') -- Triggered in smallresources
+RegisterNetEvent('seatbelt:client:ToggleSeatbelt')-- Triggered in smallresources
 AddEventHandler('seatbelt:client:ToggleSeatbelt', function()
     seatbeltOn = not seatbeltOn
 end)
 
-RegisterNetEvent('seatbelt:client:ToggleCruise') -- Triggered in smallresources
+RegisterNetEvent('seatbelt:client:ToggleCruise')-- Triggered in smallresources
 AddEventHandler('seatbelt:client:ToggleCruise', function()
     cruiseOn = not cruiseOn
 end)
@@ -97,9 +96,8 @@ Citizen.CreateThread(function()
                 DisplayRadar(true)
                 radarActive = true
                 local pos = GetEntityCoords(player)
-                local speed = GetEntitySpeed(vehicle) * 2.23694
-                local street1, street2 = GetStreetNameAtCoord(pos.x, pos.y, pos.z, Citizen.ResultAsInteger(),
-                    Citizen.ResultAsInteger())
+                local speed = GetEntitySpeed(vehicle) * 2.236936
+                local street1, street2 = GetStreetNameAtCoord(pos.x, pos.y, pos.z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
                 local fuel = exports['LegacyFuel']:GetFuel(vehicle)
                 SendNUIMessage({
                     action = 'car',
@@ -109,10 +107,9 @@ Citizen.CreateThread(function()
                     street1 = GetStreetNameFromHashKey(street1),
                     street2 = GetStreetNameFromHashKey(street2),
                     seatbelt = seatbeltOn,
-                    cruise = cruiseOn,
                     speed = math.ceil(speed),
-                    nos = nos,
-                    fuel = fuel
+                    fuel = fuel,
+                    nos = nos
                 })
             else
                 SendNUIMessage({
@@ -142,24 +139,23 @@ function GetDirectionText(heading)
 end
 
 -- Raise Minimap
-
 Citizen.CreateThread(function()
     local minimap = RequestScaleformMovie('minimap')
     while not HasScaleformMovieLoaded(minimap) do
         Wait(0)
     end
-
+    
     SetMinimapComponentPosition('minimap', 'L', 'B', -0.0045, -0.012, 0.150, 0.188888)
     SetMinimapComponentPosition('minimap_mask', 'L', 'B', 0.020, 0.022, 0.111, 0.159)
     SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.03, 0.012, 0.266, 0.237)
-
+    
+    Wait(5000)
     SetRadarBigmapEnabled(true, false)
-    Wait(500)
+    Wait(0)
     SetRadarBigmapEnabled(false, false)
 end)
 
 -- Money HUD
-
 RegisterNetEvent('hud:client:ShowAccounts')
 AddEventHandler('hud:client:ShowAccounts', function(type, amount)
     if type == 'cash' then
@@ -194,13 +190,12 @@ AddEventHandler('hud:client:OnMoneyChange', function(type, amount, isMinus)
 end)
 
 -- Stress Gain
-
-Citizen.CreateThread(function() -- Speeding
+Citizen.CreateThread(function()-- Speeding
     while true do
         if QBCore ~= nil --[[ and isLoggedIn ]] then
             local ped = PlayerPedId()
             if IsPedInAnyVehicle(ped, false) then
-                speed = GetEntitySpeed(GetVehiclePedIsIn(ped, false)) * 2.237 -- mph
+                speed = GetEntitySpeed(GetVehiclePedIsIn(ped, false)) * 2.236936 --mph
                 if speed >= Config.MinimumSpeed then
                     TriggerServerEvent('hud:server:GainStress', math.random(1, 3))
                 end
@@ -210,7 +205,7 @@ Citizen.CreateThread(function() -- Speeding
     end
 end)
 
-Citizen.CreateThread(function() -- Shooting
+Citizen.CreateThread(function()-- Shooting
     while true do
         if QBCore ~= nil --[[ and isLoggedIn ]] then
             if IsPedShooting(PlayerPedId()) and not IsWhitelistedWeapon() then
@@ -236,7 +231,6 @@ function IsWhitelistedWeapon()
 end
 
 -- Stress Screen Effects
-
 Citizen.CreateThread(function()
     while true do
         local ped = PlayerPedId()
@@ -247,13 +241,12 @@ Citizen.CreateThread(function()
             local RagdollTimeout = (FallRepeat * 1750)
             ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', ShakeIntensity)
             SetFlash(0, 0, 500, 3000, 500)
-
+            
             if not IsPedRagdoll(ped) and IsPedOnFoot(ped) and not IsPedSwimming(ped) then
                 local player = PlayerPedId()
-                SetPedToRagdollWithFall(player, RagdollTimeout, RagdollTimeout, 1, GetEntityForwardVector(player), 1.0,
-                    0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                SetPedToRagdollWithFall(player, RagdollTimeout, RagdollTimeout, 1, GetEntityForwardVector(player), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
             end
-
+            
             Citizen.Wait(500)
             for i = 1, FallRepeat, 1 do
                 Citizen.Wait(750)
