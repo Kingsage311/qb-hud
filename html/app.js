@@ -229,9 +229,9 @@ const vehHud = {
             }
             if (data.nos === 0 || data.nos === undefined) {
                 this.showNos = false;
-              } else {
+            } else {
                 this.showNos = true;
-              }
+            }
             if (data.isPaused === 1) {
                 this.show = false;
             }

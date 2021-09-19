@@ -108,8 +108,8 @@ Citizen.CreateThread(function()
                     street2 = GetStreetNameFromHashKey(street2),
                     seatbelt = seatbeltOn,
                     speed = math.ceil(speed),
-                    fuel = fuel,
-                    nos = nos
+                    nos = nos,
+                    fuel = fuel
                 })
             else
                 SendNUIMessage({
