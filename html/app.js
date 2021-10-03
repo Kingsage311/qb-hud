@@ -208,11 +208,11 @@ const playerHud = {
             }
             if (data.seatbelt === true) {
                 this.showBelt = true;
-                this.seatbeltIcon = 'fas fa-user';
+                this.seatbeltIcon = 'fas fa-user-slash';
                 this.seatbeltColor = "#00b95d";
             } else {
                 this.showBelt = true;
-                this.seatbeltIcon = 'fas fa-user-slash';
+                this.seatbeltIcon = 'fas fa-user';
                 this.seatbeltColor = "#f41a12";
             }
             if (data.seatbelt === 0) {
