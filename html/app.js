@@ -114,22 +114,23 @@ const playerHud = {
             nos: 0,
             seatbelt: 0,
             fuel: 0,
-            show: true,
+            show: false,
             showID: true,
             talking: false,
             showVoice: true,
             showHealth: true,
-            showArmor: false,
-            showHunger: false,
-            showBleed: false,
-            showThirst: false,
-            showStress: false,
-            showOxygen: false,
-            showNos: false,
-            showBelt: false,
+            showArmor: true,
+            showHunger: true,
+            showBleed: true,
+            showThirst: true,
+            showStress: true,
+            showOxygen: true,
+            showNos: true,
+            showBelt: true,
             voiceIcon: "fas fa-microphone",
             talkingColor: "#ffffff",
             seatbeltColor: "",
+            seatbeltIcon: "fas fa-user"
         };
     },
     destroyed() {
@@ -207,9 +208,11 @@ const playerHud = {
             }
             if (data.seatbelt === true) {
                 this.showBelt = true;
+                this.seatbeltIcon = 'fas fa-user';
                 this.seatbeltColor = "#00b95d";
             } else {
                 this.showBelt = true;
+                this.seatbeltIcon = 'fas fa-user-slash';
                 this.seatbeltColor = "#f41a12";
             }
             if (data.seatbelt === 0) {
