@@ -3,6 +3,7 @@ local seatbeltOn = false
 local cruiseOn = false
 local radarActive = false
 local nos = 0
+local bleedingPercentage = 0
 local stress = 0
 local hunger = 100
 local thirst = 100
@@ -54,25 +55,49 @@ Citizen.CreateThread(function()
         if isLoggedIn then
             local show = true
             local player = PlayerPedId()
+            local vehicle = GetVehiclePedIsIn(player)
             local talking = NetworkIsPlayerTalking(PlayerId())
             local voice = 0
+
+            local pid = GetPlayerServerId(PlayerId())
+
+            if IsPedSwimmingUnderWater(player) then
+                oxygen = GetPlayerUnderwaterTimeRemaining(PlayerId()) * 10
+            else
+                oxygen = 0
+            end
+
+            if IsPedInAnyVehicle(player) then
+                nos = nos
+                seatbelt = seatbeltOn
+            else
+                nos = 0
+                seatbelt = 0
+            end
+
             if LocalPlayer.state['proximity'] ~= nil then
                 voice = LocalPlayer.state['proximity'].distance
             end
+
             if IsPauseMenuActive() then
                 show = false
             end
             SendNUIMessage({
                 action = 'hudtick',
                 show = show,
+                id = pid,
+                voice = voice,
+                radio = LocalPlayer.state['radioChannel'],
+                talking = talking,
                 health = GetEntityHealth(player) - 100,
                 armor = GetPedArmour(player),
                 thirst = thirst,
+                bleed = bleedingPercentage,
                 hunger = hunger,
                 stress = stress,
-                voice = voice,
-                radio = LocalPlayer.state['radioChannel'],
-                talking = talking
+                oxygen = oxygen,
+                nos = nos,
+                seatbelt = seatbelt
             })
         else
             SendNUIMessage({
@@ -96,9 +121,9 @@ Citizen.CreateThread(function()
                 DisplayRadar(true)
                 radarActive = true
                 local pos = GetEntityCoords(player)
-                local speed = GetEntitySpeed(vehicle) * 2.236936
                 local street1, street2 = GetStreetNameAtCoord(pos.x, pos.y, pos.z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
                 local fuel = exports['LegacyFuel']:GetFuel(vehicle)
+                local speed = math.ceil(GetEntitySpeed(vehicle) * 2.236936)
                 SendNUIMessage({
                     action = 'car',
                     show = true,
@@ -106,9 +131,7 @@ Citizen.CreateThread(function()
                     direction = GetDirectionText(GetEntityHeading(player)),
                     street1 = GetStreetNameFromHashKey(street1),
                     street2 = GetStreetNameFromHashKey(street2),
-                    seatbelt = seatbeltOn,
-                    speed = math.ceil(speed),
-                    nos = nos,
+                    speed = speed,
                     fuel = fuel
                 })
             else
@@ -286,3 +309,29 @@ function GetEffectInterval(stresslevel)
     end
     return retval
 end
+
+RegisterCommand('ui-r', function()
+    isLoggedIn = true
+end)
+
+
+CreateThread(function()
+    while true do
+        if isLoggedIn then
+            QBCore.Functions.TriggerCallback('hospital:GetPlayerBleeding', function(playerBleeding)
+                if playerBleeding == 0 then
+                    bleedingPercentage = 0
+                elseif playerBleeding == 1 then
+                    bleedingPercentage = 25
+                elseif playerBleeding == 2 then
+                    bleedingPercentage = 50
+                elseif playerBleeding == 3 then
+                    bleedingPercentage = 75
+                elseif playerBleeding == 4 then
+                    bleedingPercentage = 100
+                end
+            end)
+        end
+        Wait(2500)
+    end
+end)

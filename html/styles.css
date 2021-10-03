@@ -7,6 +7,7 @@
 #main-container {
   width: 100%;
   height: 100%;
+  background: url(https://cdn.izmystic.gay/images/r2t0nb4s.jpg);
 }
 
 /* Money */
@@ -50,39 +51,28 @@
 /* Vehicle HUD */
 
 .ui-car-fuel,
-.ui-car-nos,
-.ui-car-seatbelt,
 .ui-car-speed,
 .ui-car-street {
   position: absolute;
 }
 
+.ui-car-street {
+  position: relative;
+  font-size: 15px;
+  text-transform: uppercase;
+  top: .5vh;
+  text-align: center;
+  color: #ededed;
+}
+
 .ui-car-speed {
-  bottom: 4vh;
+  bottom: 5.5vh;
   left: 16vw;
 }
 
 .ui-car-fuel {
   left: 17.9vw;
-  bottom: 1.9vw;
-}
-
-.ui-car-nos {
-  left: 15.7vw;
-  bottom: .15vw;
-}
-
-.ui-car-seatbelt {
-  left: 19.1vw;
-  bottom: 3.56vw;
-}
-
-.ui-car-street {
-  font-size: 15px;
-  text-transform: uppercase;
-  bottom: 0vh;
-  left: 18.5vw;
-  color: #ededed;
+  bottom: 2.5vw;
 }
 
 /* Animation */
@@ -102,6 +92,11 @@
 
 /* Quasar Custom Colors */
 
+/* ID */
+.text-id {
+  color: #ae47ff
+}
+
 /* Voice */
 .text-voice {
   color: #868686
@@ -112,7 +107,6 @@
   color: #868686;
   filter: brightness(0.5)
 }
-
 
 /* Health */
 .text-health {
@@ -161,26 +155,59 @@
   filter: brightness(0.5)
 }
 
+/* Bleed */
+.text-bleed {
+  color: #8d040d
+}
+
+/* Bleed Track */
+.text-bleed2 {
+  color: #8d040d;
+  filter: brightness(0.5)
+}
+
 /* Stress */
 .text-stress {
-  color: #e21210
+  color: #cb737b
 }
 
 /* Stress Track */
 .text-stress2 {
-  color: #e21210;
+  color: #cb737b;
+  filter: brightness(0.5)
+}
+
+/* Oxygen */
+.text-oxygen {
+  color: #cb737b;
+}
+
+/* Oxygen Track */
+.text-oxygen2 {
+  color: #d6655d;
   filter: brightness(0.5)
 }
 
 /* Nitrous */
 .text-nitro {
-  color: #ae00ff
+  color: #0188cb
 }
 
 /* Nitrous Track */
 .text-nitro2 {
-  color: #ae00ff;
+  color: #0188cb;
   filter: brightness(0.5)
+}
+
+/* Fuel */
+.text-fuel {
+  color: #fff4bc
+}
+
+/* Fuel Track */
+.text-fuel2 {
+  color: #fff4bc;
+  filter: brightness(0.5);
 }
 
 .text-center {
