@@ -162,20 +162,81 @@ function GetDirectionText(heading)
 end
 
 -- Raise Minimap
+posX = 0.01
+posY = 0.0-- 0.0152
+
+width = 0.183
+height = 0.24--0.354
+
+local loaded = false
+
+AddEventHandler("playerSpawned", function()
+	if not loaded then
+		loaded = true
+	
+		RequestStreamedTextureDict("circlemap", false)
+		while not HasStreamedTextureDictLoaded("circlemap") do
+			Wait(100)
+		end
+
+		AddReplaceTexture("platform:/textures/graphics", "radarmasksm", "circlemap", "radarmasksm")
+
+		SetMinimapClipType(1)
+        SetMinimapComponentPosition('minimap', 'L', 'B', -0.0045, -0.012, 0.150, 0.188888)
+        SetMinimapComponentPosition('minimap_mask', 'L', 'B', 0.020, 0.022, 0.111, 0.159)
+        SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.03, 0.012, 0.266, 0.237)
+
+		local minimap = RequestScaleformMovie("minimap")
+		SetRadarBigmapEnabled(true, false)
+		Wait(0)
+		SetRadarBigmapEnabled(false, false)
+
+		while true do
+			Wait(0)
+			BeginScaleformMovieMethod(minimap, "SETUP_HEALTH_ARMOUR")
+			ScaleformMovieMethodAddParamInt(3)
+			EndScaleformMovieMethod()
+		end
+	end
+end)
+
+AddEventHandler("hud-gameplay:enteredVehicle", function()
+	SendNUIMessage({
+		action = "displayUI"
+	})
+end)
+
+AddEventHandler("hud-gameplay:exitVehicle", function()
+	SendNUIMessage({
+		action = "hideUI"
+	})
+end)
+
+local pauseMenu = false
+
 Citizen.CreateThread(function()
-    local minimap = RequestScaleformMovie('minimap')
-    while not HasScaleformMovieLoaded(minimap) do
-        Wait(0)
-    end
-    
-    SetMinimapComponentPosition('minimap', 'L', 'B', -0.0045, -0.012, 0.150, 0.188888)
-    SetMinimapComponentPosition('minimap_mask', 'L', 'B', 0.020, 0.022, 0.111, 0.159)
-    SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.03, 0.012, 0.266, 0.237)
-    
-    Wait(5000)
-    SetRadarBigmapEnabled(true, false)
-    Wait(0)
-    SetRadarBigmapEnabled(false, false)
+	while true do
+		Citizen.Wait(1000)
+		
+		if IsPauseMenuActive() and not pauseMenu then
+			pauseMenu = true
+			SendNUIMessage({
+				open = 30,
+			}) 
+			if IsPedInAnyVehicle(PlayerPedId()) then
+				SendNUIMessage({
+					action = "hideUI"
+				})
+			end
+		elseif not IsPauseMenuActive() and pauseMenu then
+			pauseMenu = false
+			if IsPedInAnyVehicle(PlayerPedId()) then
+				SendNUIMessage({
+					action = "displayUI"
+				})
+			end
+		end
+	end
 end)
 
 -- Money HUD
