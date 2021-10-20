@@ -5,7 +5,7 @@ My edit of qb-hud
 
 ## Thanks to ngucthanh117 for the minimap
 
-![image](https://imgur.com/dc18bacc-4e96-4a71-8ae1-c57714020d43)
+![image](blob:https://imgur.com/dc18bacc-4e96-4a71-8ae1-c57714020d43
 
 Color Palette: https://quasar.dev/style/color-palette
 
