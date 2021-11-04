@@ -102,35 +102,32 @@ const moneyHud = Vue.createApp({
 const playerHud = {
     data() {
         return {
-            id: 0,
-            voice: 0,
+            voice: 2,
             radio: 0,
-            health: 0,
-            armor: 0,
-            hunger: 0,
-            thirst: 0,
-            stress: 0,
-            oxygen: 0,
-            nos: 0,
-            seatbelt: 0,
+            health: 45,
+            armor: 45,
+            hunger: 45,
+            thirst: 45,
+            stress: 45,
+            oxygen: 45,
+            nos: 45,
+            seatbelt: 1,
             fuel: 0,
             show: false,
-            showID: true,
             talking: false,
             showVoice: true,
             showHealth: true,
-            showArmor: true,
-            showHunger: true,
-            showBleed: true,
-            showThirst: true,
-            showStress: true,
-            showOxygen: true,
+            showArmor: false,
+            showHunger: false,
+            showBleed: false,
+            showThirst: false,
+            showStress: false,
+            showOxygen: false,
             showNos: true,
-            showBelt: true,
+            showBelt: false,
             voiceIcon: "fas fa-microphone",
             talkingColor: "#ffffff",
             seatbeltColor: "",
-            seatbeltIcon: "fas fa-user"
         };
     },
     destroyed() {
@@ -147,7 +144,6 @@ const playerHud = {
         hudTick(data) {
             this.show = data.show;
             this.health = data.health;
-            this.id = data.id;
             this.armor = data.armor;
             this.hunger = data.hunger;
             this.thirst = data.thirst;
@@ -208,11 +204,9 @@ const playerHud = {
             }
             if (data.seatbelt === true) {
                 this.showBelt = true;
-                this.seatbeltIcon = 'fas fa-user-slash';
                 this.seatbeltColor = "#00b95d";
             } else {
                 this.showBelt = true;
-                this.seatbeltIcon = 'fas fa-user';
                 this.seatbeltColor = "#f41a12";
             }
             if (data.seatbelt === 0) {

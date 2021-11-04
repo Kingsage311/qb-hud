@@ -28,9 +28,6 @@
             </div>
             <div id="ui-container">
                 <div id="playerHud" v-show="show">
-                    <!-- <div v-if="showID">
-                        <q-circular-progress font-size="15px" class="text-white q-ml-xs" show-value :value="id" size="45px" :thickness=".3" color="id" track-color="id" center-color="center" :max="64">
-                    </div> -->
                     <div v-if="showVoice">
                         <q-circular-progress class="q-ml-xs" show-value :value="voice" size="45px" :thickness=".3" :style="{color: talkingColor}" track-color="voice2" center-color="center" :min="0" :max="3"><q-icon :name="voiceIcon" size="19px" :style="{color: talkingColor}"/>
                     </div>
@@ -59,22 +56,22 @@
                         <q-circular-progress class="q-ml-xs" show-value :value="nos" size="45px" :thickness=".3" color="nitro" track-color="nitro2" center-color="center"><q-icon name="fas fa-bolt" size="19px" color="nitro"/>
                     </div>
                     <div v-if="showBelt">
-                        <q-circular-progress class="q-ml-xs" show-value :value="seatbelt" size="45px" :thickness=".3" :style="{color: seatbeltColor}" track-color="transparent" center-color="center" :min="1" :max="1"><q-icon :name="seatbeltIcon" size="19px" :style="{color: seatbeltColor}"/>
+                        <q-circular-progress class="q-ml-xs" show-value :value="seatbelt" size="45px" :thickness=".3" :style="{color: seatbeltColor}" track-color="transparent" center-color="center" :min="1" :max="1"><q-icon name="fas fa-user-slash" size="19px" :style="{color: seatbeltColor}"/>
                     </div>
                 </div>
             </div>
             <div id="veh-container">
                 <div v-show="show">
-                    <div class="ui-car-speed">
-                        <q-circular-progress show-value :value="speed" :angle="230" class="text-white" size="60px" :thickness="0.2" color="white" track-color="transparent" center-color="transparent" :max="336" />
-                    </div>
-                    <div class="ui-car-fuel">
-                        <q-circular-progress show-value :value="fuel" :angle="240" size="30px" :thickness="0.2" color="white" track-color="transparent" center-color="transparent"><q-icon name="fas fa-gas-pump" size="11px" color="white"/>
-                    </div>
-                    <div class="ui-car-street">
-                        <p>{{direction}} | {{street1}} | {{street2}}</p>
-                    </div>
+                <div class="ui-car-speed">
+                    <q-circular-progress show-value :value="speed" :angle="230" class="text-white" size="60px" :thickness="0.2" color="white" track-color="transparent" center-color="transparent" :max="336" />
                 </div>
+                <div class="ui-car-fuel">
+                    <q-circular-progress show-value :value="fuel" :angle="240" size="30px" :thickness="0.2" color="white" track-color="transparent" center-color="transparent"><q-icon name="fas fa-gas-pump" size="11px" color="white"/>
+                </div>
+                <div class="ui-car-street">
+                    <p>{{direction}} | {{street1}} | {{street2}}</p>
+                </div>
+            </div>
             </div>
         </div>
     </body>

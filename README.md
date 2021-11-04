@@ -1,7 +1,7 @@
 # qb-hud
 My edit of qb-hud
 
-![image](https://cdn.izmystic.gay/images/bbfjvfvu.png)
+![image](https://cdn.izmystic.gay/images/ag3u84zc.png)
 
 Color Palette: https://quasar.dev/style/color-palette
 
