@@ -1,11 +1,15 @@
 # qb-hud
 My edit of qb-hud
 
+<<<<<<< HEAD
 ## Thanks to izMystic for his edits
 
 ## Thanks to ngucthanh117 for the minimap
 
 ![image](https://i.ibb.co/nrb4DSG/image.png)
+=======
+![image](https://cdn.izmystic.gay/images/ag3u84zc.png)
+>>>>>>> main
 
 Color Palette: https://quasar.dev/style/color-palette
 
