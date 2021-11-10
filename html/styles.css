@@ -55,14 +55,16 @@
   position: absolute;
 }
 
-.ui-car-street {
-  position: relative;
-  font-size: 15px;
-  text-transform: uppercase;
-  top: .5vh;
-  text-align: center;
-  color: #ededed;
-}
+.ui-car-street { 
+  position: absolute; 
+  font-size: 15px; 
+  text-transform: uppercase; 
+  left: 73vh; 
+  bottom: .5vh; 
+  text-align: center; 
+  text-shadow: 1px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000; 
+  color: #dee2e6; 
+} 
 
 .ui-car-speed {
   bottom: 5.5vh;
